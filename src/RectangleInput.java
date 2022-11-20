@@ -12,12 +12,13 @@ public class RectangleInput extends javax.swing.JFrame implements Node{
     private Color borderColor;
     private Node parentNode;
     private Rectangle rectangle;
+    private VectorDrawingMachine v;
 
-
-    public RectangleInput(Rectangle rectangle) {
+    public RectangleInput(Rectangle rectangle,VectorDrawingMachine v) {
         initComponents();
         this.parentNode = null;
         this.rectangle = rectangle;
+        this.v = v;
     }
 
     public static boolean isNumeric(String stringNum){
@@ -51,7 +52,12 @@ public class RectangleInput extends javax.swing.JFrame implements Node{
         heigth_input = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel5.setBackground(new java.awt.Color(255, 204, 204));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -220,7 +226,6 @@ public class RectangleInput extends javax.swing.JFrame implements Node{
         Color thisColorr = JColorChooser.showDialog(null, "enter fill rectangle color", Color.black);
         this.fillColor = thisColorr;
         CHOOSEDFILLCOLOR.setBackground(this.fillColor);
-        this.isVisible();
     }//GEN-LAST:event_FillcolorButtonActionPerformed
 
     private void ADDBUTTONActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ADDBUTTONActionPerformed
@@ -243,6 +248,7 @@ public class RectangleInput extends javax.swing.JFrame implements Node{
             ((JFrame)getParentNode()).setVisible(true);
             this.fillColor = Color.BLACK;
             this.borderColor  = Color.BLACK;
+            v.addShape(rectangle);
         }
     }//GEN-LAST:event_ADDBUTTONActionPerformed
 
@@ -261,6 +267,12 @@ public class RectangleInput extends javax.swing.JFrame implements Node{
         CHOOSEDBORDERCOLOR.setBackground(this.borderColor);
         this.isVisible();
     }//GEN-LAST:event_BrodercolorButton1ActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        this.setVisible(false);
+       ((JFrame)getParentNode()).setVisible(true);
+    }//GEN-LAST:event_formWindowClosing
 
 
 

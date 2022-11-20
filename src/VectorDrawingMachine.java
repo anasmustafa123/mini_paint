@@ -158,30 +158,47 @@ public class VectorDrawingMachine extends JFrame implements Node{
     private void LINEBUTTONActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LINEBUTTONActionPerformed
         // TODO add your handling code here:      
         LineSegment lineSegment = new LineSegment();
-        LineSegmentInput lineSegmentInput = new LineSegmentInput(lineSegment);
         lineSegment.setPosition(new Point(0,0),new Point(0,0)); //givving them an inital value to draw nothing incase the user exits without adding value
         lineSegment.setColor(Color.BLACK);
+        LineSegmentInput lineSegmentInput = new LineSegmentInput(lineSegment,this);  
         lineSegmentInput.setParentNode(this);
         lineSegmentInput.setResizable(false);
         lineSegmentInput.setLocationRelativeTo(null);
         lineSegmentInput.setTitle("Line Segment Data");
         this.setVisible(false);
         lineSegmentInput.setVisible(true);
-        //System.err.println(lineSegmentInput.Iscrested());
-        myPanel1.addShape(lineSegment);
-        compobox.addItem("Line" + myPanel1.getShapes().length);   
-
-      //  System.err.println(lineSegmentInput.Iscrested());
-
-        myPanel1.refresh(null);
         
+       // System.err.println("i told u3");
+        //System.err.println(lineSegmentInput.Iscrested());
+    //    if(lineSegment.getPosition().x != 0 && lineSegment.getPosition().y != 0 && lineSegment.getPosition2().x != 0 && lineSegment.getPosition2().y != 0){
+       // if( !(lineSegmentInput.isVisible()) ){
+            
+           //myPanel1.addShape(lineSegment);
+           // compobox.addItem("Line" + myPanel1.getShapes().length);   
+
+            //myPanel1.refresh(null);
+       // System.err.println("i told u22");
 
     }//GEN-LAST:event_LINEBUTTONActionPerformed
 
+    public void addShape(Shape shape){
+            myPanel1.addShape(shape);
+            if(shape instanceof LineSegment)
+                compobox.addItem("Line" + myPanel1.getShapes().length);   
+            else  if(shape instanceof Circle)
+                compobox.addItem("Circle" + myPanel1.getShapes().length);   
+            else  if(shape instanceof Square)
+                compobox.addItem("Square" + myPanel1.getShapes().length);   
+            else  if(shape instanceof Rectangle)
+                compobox.addItem("Rectangle" + myPanel1.getShapes().length);   
+            myPanel1.refresh(null);
+    }
+    
+    
     private void RectangleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RectangleButtonActionPerformed
         // TODO add your handling code here:
         Rectangle rectangle =  new Rectangle(0,0);
-        RectangleInput rectangleInput = new RectangleInput(rectangle);
+        RectangleInput rectangleInput = new RectangleInput(rectangle,this);
         rectangle.setColor(Color.BLACK);
         rectangle.setFillColor(Color.BLACK);
         rectangle.setPosition(new  Point(0,0));
@@ -189,15 +206,15 @@ public class VectorDrawingMachine extends JFrame implements Node{
         rectangleInput.setVisible(true);
         this.setVisible(false);
         
-        myPanel1.addShape(rectangle);
-        compobox.addItem("rectangle" + (myPanel1.getShapes()).length);
-        myPanel1.refresh(null);
+      //  myPanel1.addShape(rectangle);
+       // compobox.addItem("rectangle" + (myPanel1.getShapes()).length);
+      //  myPanel1.refresh(null);
     }//GEN-LAST:event_RectangleButtonActionPerformed
 
     private void SquareButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SquareButtonActionPerformed
         // TODO add your handling code here:
         Square square = new Square();
-        SquareInput squareInput = new SquareInput(square);
+        SquareInput squareInput = new SquareInput(square,this);
         square.setLength(0);
         square.setColor(Color.BLACK);
         square.setFillColor(Color.BLACK);
@@ -206,15 +223,15 @@ public class VectorDrawingMachine extends JFrame implements Node{
         squareInput.setVisible(true);
         this.setVisible(false);
         
-        myPanel1.addShape(square);
-        compobox.addItem("square" + (myPanel1.getShapes()).length);
-        myPanel1.refresh(null);
+      //  myPanel1.addShape(square);
+      //  compobox.addItem("square" + (myPanel1.getShapes()).length);
+      //  myPanel1.refresh(null);
     }//GEN-LAST:event_SquareButtonActionPerformed
 
     private void circleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_circleButtonActionPerformed
         // TODO add your handling code here:
         Circle circle = new Circle();
-        CircleInput circleInput = new CircleInput(circle);
+        CircleInput circleInput = new CircleInput(circle,this);
         circle.setRaduis(0);
         circle.setColor(Color.BLACK);
         circle.setFillColor(Color.BLACK);
@@ -223,9 +240,9 @@ public class VectorDrawingMachine extends JFrame implements Node{
         circleInput.setVisible(true);
         this.setVisible(false);
         
-        myPanel1.addShape(circle);
-        compobox.addItem("circle" + (myPanel1.getShapes()).length);
-        myPanel1.refresh(null);
+    //    myPanel1.addShape(circle);
+      //  compobox.addItem("circle" + (myPanel1.getShapes()).length);
+     //   myPanel1.refresh(null);
         
     }//GEN-LAST:event_circleButtonActionPerformed
 

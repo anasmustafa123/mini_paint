@@ -13,11 +13,13 @@ public class CircleInput extends JFrame implements Node{
     private Color fillColor;
     private Color borderColor;
     private Node parentNode;
+    private VectorDrawingMachine v;
     
-    public CircleInput(Circle circle) {
+    public CircleInput(Circle circle, VectorDrawingMachine v) {
         initComponents();
         this.circle = circle;
         parentNode  = null;
+        this.v  =  v;
     }
 
       public static boolean isNumeric(String stringNum){
@@ -226,7 +228,6 @@ public class CircleInput extends JFrame implements Node{
         Color thisColorr = JColorChooser.showDialog(null, "enter fill circle color", Color.black);
         this.fillColor = thisColorr;
         CHOOSEDFILLCOLOR.setBackground(this.fillColor);
-        this.isVisible();
     }//GEN-LAST:event_FillcolorButtonActionPerformed
 
     private void ADDBUTTONActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ADDBUTTONActionPerformed
@@ -248,6 +249,7 @@ public class CircleInput extends JFrame implements Node{
             ((JFrame)getParentNode()).setVisible(true);
             this.fillColor = Color.BLACK;
             this.borderColor  = Color.BLACK;
+            this.v.addShape(circle);
         }
     }//GEN-LAST:event_ADDBUTTONActionPerformed
 
@@ -269,11 +271,6 @@ public class CircleInput extends JFrame implements Node{
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
-        x1.setText("");
-        raduis.setText("");
-        y1.setText("");
-        this.fillColor = Color.BLACK;
-        this.borderColor = Color.BLACK;
         this.setVisible(false);
        ((JFrame)getParentNode()).setVisible(true);
     }//GEN-LAST:event_formWindowClosing

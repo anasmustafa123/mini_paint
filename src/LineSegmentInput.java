@@ -10,11 +10,13 @@ public class LineSegmentInput extends JFrame implements Node{
     private Node parentNode;
     private final LineSegment lineSegment;
     private Color color;
+    private VectorDrawingMachine machine;
    // private boolean isCreated;
-    public LineSegmentInput(LineSegment lineSegment) {
+    public LineSegmentInput(LineSegment lineSegment,VectorDrawingMachine m) {
         initComponents();
         parentNode = null;
         this.lineSegment = lineSegment;
+        this.machine = m;
      //   this.isCreated = false;
     }
             
@@ -204,12 +206,13 @@ public class LineSegmentInput extends JFrame implements Node{
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
-       x1.setText("");
-       x2.setText("");
-       y1.setText("");
-       y2.setText("");
-       this.color = Color.BLACK;
+      // x1.setText("");
+    //   x2.setText("");
+      // y1.setText("");
+    //   y2.setText("");
+     //  this.color = Color.BLACK;
         this.setVisible(false);
+      // this.notifyAll();
        ((JFrame)getParentNode()).setVisible(true);
     }//GEN-LAST:event_formWindowClosing
 
@@ -231,6 +234,7 @@ public class LineSegmentInput extends JFrame implements Node{
             this.setVisible(false);
             ((JFrame)getParentNode()).setVisible(true);
             this.color = Color.BLACK;
+            machine.addShape(lineSegment);
         }
     }//GEN-LAST:event_ADDBUTTONActionPerformed
 

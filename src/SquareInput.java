@@ -12,10 +12,12 @@ public class SquareInput extends JFrame implements Node{
     private Color borderColor;
     private Node parentNode;
     private Square square;
-    public SquareInput(Square square) {
+    private VectorDrawingMachine v;
+    public SquareInput(Square square,VectorDrawingMachine v) {
         initComponents();
         this.square = square;
         this.parentNode = null;
+        this.v = v;
     }
 
       public static boolean isNumeric(String stringNum){
@@ -48,7 +50,12 @@ public class SquareInput extends JFrame implements Node{
         jLabel7 = new javax.swing.JLabel();
         length_input = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setBackground(new java.awt.Color(255, 204, 204));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -220,7 +227,6 @@ public class SquareInput extends JFrame implements Node{
         Color thisColorr = JColorChooser.showDialog(null, "enter fill square color", Color.black);
         this.fillColor = thisColorr;
         CHOOSEDFILLCOLOR.setBackground(this.fillColor);
-        this.isVisible();
     }//GEN-LAST:event_FillcolorButtonActionPerformed
 
     private void ADDBUTTONActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ADDBUTTONActionPerformed
@@ -242,6 +248,7 @@ public class SquareInput extends JFrame implements Node{
             ((JFrame)getParentNode()).setVisible(true);
             this.fillColor = Color.BLACK;
             this.borderColor  = Color.BLACK;
+            v.addShape(square);
         }
     }//GEN-LAST:event_ADDBUTTONActionPerformed
 
@@ -260,6 +267,12 @@ public class SquareInput extends JFrame implements Node{
         CHOOSEDBORDERCOLOR.setBackground(this.borderColor);
         this.isVisible();
     }//GEN-LAST:event_BrodercolorButton1ActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        this.setVisible(false);
+       ((JFrame)getParentNode()).setVisible(true);
+    }//GEN-LAST:event_formWindowClosing
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
