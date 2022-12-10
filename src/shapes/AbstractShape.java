@@ -74,7 +74,7 @@ public abstract class AbstractShape implements  Shape,Moveable,Resizable {
 
     @Override
     public int getmoveRaduis() {
-        return 10;
+        return 20;
     }
 
 }

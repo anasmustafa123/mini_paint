@@ -29,7 +29,7 @@ public class MyPanel extends JPanel implements DrawingEngine{
     public AbstractShape find( Point point ){
         for(int i = (shapes.size() -1); i >= 0; i--){
             AbstractShape s = shapes.get(i);
-            if(s.contains(point) )
+            if(s.contains(point) || s.readyToMove(point))
                 return s;
         }
         return null;
@@ -106,13 +106,16 @@ public class MyPanel extends JPanel implements DrawingEngine{
             }
                 
             if(current != null ) {
-                current.setIfClicked(true);
-                current.setDraggingPoint(e.getPoint());  
-                machine.selectItemCompoBox(-1);
-                machine.toTopOFCompoBox(shapes.indexOf(current));
-                toTop(current);
                 if(current.readyToMove(e.getPoint()))
                     current.setResizingPoint(e.getPoint());
+                else{
+                   current.setIfClicked(true);
+                   current.setDraggingPoint(e.getPoint());  
+                   machine.selectItemCompoBox(-1);
+                   machine.toTopOFCompoBox(shapes.indexOf(current));
+                   toTop(current);  
+                }
+                  
                 repaint();
             }
     }        
@@ -126,6 +129,7 @@ public class MyPanel extends JPanel implements DrawingEngine{
         @Override
         public void mouseDragged(MouseEvent e) {
             if(current != null){
+                System.err.println(current.readyToMove(e.getPoint()));
                 if(current.readyToMove(e.getPoint()))
                     current.resize(e.getPoint());
                 else
@@ -138,11 +142,9 @@ public class MyPanel extends JPanel implements DrawingEngine{
         public void mouseMoved(MouseEvent e) {
             if(find(e.getPoint()) == null){
                 setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
-            }
-           // else if(find(e.getPoint()).readyToMove(e.getPoint()))
-             //   setCursor(Cursor.getPredefinedCursor(Cursor.E_RESIZE_CURSOR));
-            else{
-                setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+               }
+               else{
+                   setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             }
         }
     }

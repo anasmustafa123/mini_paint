@@ -61,16 +61,23 @@ public class Oval extends AbstractShape{
 
     @Override
     public boolean readyToMove(Point point) {
-        return isPointInRange(point,new Point(point.x + width,point.y)) || isPointInRange(point,new Point(point.x,point.y + height)) ||  isPointInRange(point,new Point(point.x + width,point.y + height)) ||  isPointInRange(point,new Point(point.x,point.y)) ;
+        Point p = getPosition();
+        return isPointInRange(point,new Point(p.x + 2*width,p.y)) || isPointInRange(point,new Point(p.x,p.y + 2*height)) ||  isPointInRange(point,new Point(p.x + 2*width,p.y + 2*height)) ||  isPointInRange(point,new Point(getPosition().x,getPosition().y)) ;
     }
 
     @Override
     public void resize(Point point) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        PointOperations op = new PointOperations();
+        Point offset = op.sub(point,getResizeingPoint());
+        setWidth(width  + offset.x);
+        setheight(height  - offset.y);
+        setPosition(new Point(getPosition().x , point.y));
+        setResizingPoint(point);
     }
 
     private boolean isPointInRange(Point point , Point centerPoint){
         PointOperations op = new PointOperations();
+        System.err.println(op.getDistancae(point, centerPoint) + "     ");
         return op.getDistancae(point, centerPoint) <= getmoveRaduis();
     }
     
